@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}
+        {{ id }}<br>
+        {{ username }}<br>
+        {{ email }}<br>
+        <ul>
+            {% for run in runs %}
+                <li>{{ run.getFormatedDate }}</li>
+            {% endfor %}
+        </ul>
+
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
