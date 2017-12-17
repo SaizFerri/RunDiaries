@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row align-items-center">
+        <div class="col-lg-2">
+            <img class="rounded-circle" src="http://via.placeholder.com/140x140" alt="profile-pic">
+        </div>
+        <div class="col-lg-9">
+            <h3>{{ username }}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <!-- Anzahl der Lauftage -->
+            lauftage
+        </div>
+        <div class="col-lg-4">
+            <!-- Gesamttage seit dem ersten Lauftag (bis heute, nicht bis zum letzten hinterlegten Lauftag) -->
+            gesamttage
+        </div>
+        <div class="col-lg-4">
+            <!-- Gesamte bisher gelaufene Strecke -->
+            strecke
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            {% include 'user/runs.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

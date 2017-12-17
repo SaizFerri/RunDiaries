@@ -47,19 +47,16 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="json_array", nullable=true)
+     */
+    private $roles = array();
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Run", mappedBy="user")
      */
     private $runs;
 
 
-    public function __construct()
-    {
-        $this->runs = new ArrayCollection();
-    }
-
-    /**
-     * @return Collection|Run[]
-     */
     public function getRuns()
     {
         return $this->runs;
@@ -112,14 +109,23 @@ class User implements UserInterface
 
     public function getSalt()
     {
-        // The bcrypt algorithm doesn't require a separate salt.
-        // You *may* need a real salt if you choose a different encoder.
         return null;
     }
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $tmpRoles = $this->roles;
+
+        if (in_array('ROLE_USER', $tmpRoles) === false) {
+            $tmpRoles[] = 'ROLE_USER';
+        }
+        
+        return $tmpRoles;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     public function eraseCredentials()

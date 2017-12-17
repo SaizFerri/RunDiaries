@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row">
+        {% for user in users %}
+            <div class="col-lg-4 pt-1 pb-1">
+                <div class="card" style="width: 20rem;">
+                    <img class="card-img-top" src="http://via.placeholder.com/318x180" alt="card-image">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ user.username }}</h4>
+                        <a href="{{ path('show_user', { 'id': user.id })}}" class="btn btn-primary">Show profile</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -14,6 +14,10 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: /overview
+            logout:
+                path: /logout
+                target: /overview
 
             # activate different ways to authenticate
 
@@ -26,3 +30,9 @@ security:
         App\Entity\User:
             algorithm: bcrypt
             cost: 10
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/overview, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY}
+    access_denied_url: /overview

@@ -1,0 +1,36 @@
+<div class="my-table-wrapper">
+
+    <table class="table table-striped table-dark my-table">
+        <thead>
+            <tr>
+                <th style="padding-right: 0;">Date</th>
+                <th>Distance</th>
+                <th>Time</th>
+                <th>Speed</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for run in runs %}
+                <tr id="{{ run.id }}">
+                    <th scope="row">
+                        {{ run.getFormatedDate }}
+                    </th>
+                    <td>
+                        {{ run.distance }} km
+                    </td>
+                    <td>
+                        {{ run.getFormatedTime }} h
+                    </td>
+                    <td>
+                        {{ run.speed }} km/h
+                    </td>
+                    <td>
+                        <a class="btn btn-danger my-btn-remove" href="#">x</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>

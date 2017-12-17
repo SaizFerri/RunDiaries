@@ -93,6 +93,11 @@ class Run
         return $this->time;
     }
 
+    public function getFormatedTime()
+    {
+        return date_format($this->time, 'H:i:s');
+    }
+
     public function setTime($time)
     {
         return $this->time = $time;
