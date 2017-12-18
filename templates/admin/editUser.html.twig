@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="panel">
-        <div class="panel-heading">
+    <div class="card">
+        <div class="card-header">
             {{ user.username }}
         </div>
-        <div class="panel-body">
-            {{ form(form) }}
+        <div class="card-body">
+            <form action="{{ path('edit_user', { 'id': user.id }) }}" method="post">
+                <div class="form-group">
+                    {{ form_row(form.roles, { attr:{ 'class': 'p-1' } }) }}
+                </div>
+                {{ form_row(form.save) }}
+            </form>
         </div>
     </div>
 {% endblock %}

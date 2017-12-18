@@ -7,7 +7,9 @@
                     <img class="card-img-top" src="http://via.placeholder.com/318x180" alt="card-image">
                     <div class="card-body">
                         <h4 class="card-title">{{ user.username }}</h4>
-                        <a href="{{ path('show_user', { 'id': user.id })}}" class="btn btn-primary">Show profile</a>
+                        <span>Anzahl der lauftage</span><br>
+                        <span>Gelaufene Strecke</span><br>
+                        <a href="{{ path('show_user', { 'id': user.id }) }}" class="btn btn-primary">Show profile</a>
                     </div>
                 </div>
             </div>

@@ -6,23 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Form\UserType;
 use App\Entity\User;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="default")
-     */
-     public function index(UserInterface $user)
-     {
-          return $this->render('base.html.twig', array(
-               'id' => $user->getId(),
-          ));
-     }
-
      /**
-      * @Route("/overview", name="overview")
+      * @Route("/", name="overview")
       */
      public function show(UserInterface $user = null)
      {
@@ -60,21 +52,45 @@ class DefaultController extends Controller
      /**
       * @Route("/admin/edit_user/{id}", name="edit_user")
       */
-     public function editUserAction(Request $request, User $user, UserInterface $userLoggedIn)
+     public function editUserAction(Request $request, User $user, UserInterface $userLoggedIn = null)
      {
           $this->denyAccessUnlessGranted('ROLE_ADMIN');
-          
+
+          if ($userLoggedIn === null) {
+               $id = null;
+          } else {
+               $id = $userLoggedIn->getId();
+          }
+
           $em = $this->getDoctrine()->getManager();
-          $form = $this->createForm(UserType::class, $user);
+          $form = $this->createFormBuilder($user)
+               ->add('roles', ChoiceType::class, array(
+                    'multiple' => true,
+                    'expanded' => true,
+                    'choices' => array(
+                        'Admin' => 'ROLE_ADMIN',
+                        'User' => 'ROLE_USER',
+                        'Creator' => 'ROLE_CREATOR'
+                    )
+               ))
+               ->add('save', SubmitType::class, array(
+                    'label' => 'Save',
+                    'attr' => array('class' => 'btn btn-success')
+               ))
+               ->remove('plainPassword')
+               ->getForm();
           $form->handleRequest($request);
 
-          if ($form->isSubmitted() && $form->isValid()) {
+          if ($form->isSubmitted()) {
+               $user->setRoles($form->getData()->getRoles());
                $em->persist($user);
                $em->flush();
+
+               return $this->redirectToRoute('admin_dashboard');
           }
 
           return $this->render('admin/editUser.html.twig', array(
-               'id' => $userLoggedIn->getId(),
+               'id' => $id,
                'user' => $user,
                'form' => $form->createView()
           ));

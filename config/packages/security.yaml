@@ -14,10 +14,10 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: /overview
+                default_target_path: /
             logout:
                 path: /logout
-                target: /overview
+                target: /
 
             # activate different ways to authenticate
 
@@ -32,7 +32,9 @@ security:
             cost: 10
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/overview, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/, roles: IS_AUTHENTICATED_FULLY}
+        - { path: ^/user, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/run, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     access_denied_url: /overview

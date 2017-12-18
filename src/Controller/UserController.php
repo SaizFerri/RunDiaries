@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Form\UserRegistrationType;
 
 class UserController extends Controller
 {
@@ -34,8 +36,39 @@ class UserController extends Controller
     }
 
     /**
-     *
+     * @Route("/register", name="register")
      */
+    public function register(Request $request, UserInterface $userLoggedIn = null, UserPasswordEncoderInterface $encoder)
+    {
+        if ($userLoggedIn === null) {
+             $id = null;
+        } else {
+             $id = $userLoggedIn->getId();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = new User();
+
+        $form = $this->createForm(UserRegistrationType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $encoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render('security/registration.html.twig', array(
+            'id' => $id,
+            'form' => $form->createView()
+        ));
+    }
 
     /**
      * @Route("/user/{id}", name="show_user", requirements={"id"="\d+"})
