@@ -11,11 +11,11 @@
         {% endif %}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="p-1">
-                <a class="btn btn-default" href="{{ path('show_user', { 'id': id }) }}">Profile</a>
+                <a class="btn btn-default" href="{{ path('show_user', { 'id': app.user.id }) }}">Profile</a>
                 <a class="btn btn-danger" href="{{ path('logout') }}">Logout</a>
             </div>
         {% endif %}
-        {% if (is_granted('IS_AUTHENTICATED_ANONYMOUSLY')) and (id == null) %}
+        {% if (is_granted('IS_AUTHENTICATED_ANONYMOUSLY')) and (app.user == null) %}
             <div class="p-1">
                 <a class="btn btn-warning" href="{{ path('register') }}">Register</a>
                 <a class="btn btn-primary" href="{{ path('login') }}">Login</a>

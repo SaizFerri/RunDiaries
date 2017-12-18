@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use App\Form\UserRegistrationType;
 
 class UserController extends Controller
@@ -15,12 +16,10 @@ class UserController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function login(Request $request, AuthenticationUtils $authUtils, UserInterface $user = null)
+    public function login(Request $request, AuthenticationUtils $authUtils, AuthorizationCheckerInterface $authChecker)
     {
-        if ($user === null) {
-             $id = null;
-        } else {
-             $id = $user->getId();
+        if ($authChecker->isGranted('IS_AUTHENTICATED_FULLY') === true) {
+            return $this->redirectToRoute('overview');
         }
 
         $error = $authUtils->getLastAuthenticationError();
@@ -28,7 +27,6 @@ class UserController extends Controller
         $lastUsername = $authUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', array(
-            'id'            => $id,
             'last_username' => $lastUsername,
             'error'         => $error
         ));
@@ -37,12 +35,10 @@ class UserController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, UserInterface $userLoggedIn = null, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, AuthorizationCheckerInterface $authChecker)
     {
-        if ($userLoggedIn === null) {
-             $id = null;
-        } else {
-             $id = $userLoggedIn->getId();
+        if ($authChecker->isGranted('IS_AUTHENTICATED_FULLY') === true) {
+            return $this->redirectToRoute('overview');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -64,7 +60,6 @@ class UserController extends Controller
         }
 
         return $this->render('security/registration.html.twig', array(
-            'id' => $id,
             'form' => $form->createView()
         ));
     }
@@ -72,7 +67,7 @@ class UserController extends Controller
     /**
      * @Route("/user/{id}", name="show_user", requirements={"id"="\d+"})
      */
-     public function index(User $user, UserInterface $userLoggedIn)
+     public function index(User $user)
      {
 
         if (!$user) {
@@ -82,7 +77,6 @@ class UserController extends Controller
         }
 
         return $this->render('user/user.html.twig', array(
-            'id' => $userLoggedIn->getId(),
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'runs' => $user->getRuns(),
