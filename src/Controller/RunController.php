@@ -22,47 +22,41 @@ class RunController extends Controller
      */
      public function new($id, Request $request)
      {
-          // $em = $this->getDoctrine()->getManager();
-          //
-          // $run = $this->getDoctrine()
-          //     ->getRepository(Run::class)
-          //     ->find($id);
-          //
-          // dump($run);
-          //
-          //  $em->remove($run);
-          //  $em->flush();
-          //
-          //  return new Response('<html><body>OK</body></html>');
-         $run = new Run();
+          $em = $this->getDoctrine()->getManager();
 
-         $form = $this->createFormBuilder($run)
-             ->add('date', DateType::class)
-             ->add('distance', NumberType::class)
-             ->add('time', TimeType::class)
-             ->add('speed', NumberType::class)
-             ->add('save', SubmitType::class, array('label' => 'Save'))
-             ->getForm();
+          $run = $this->getDoctrine()
+              ->getRepository(Run::class)
+              ->find($id);
 
-          $form->handleRequest($request);
+          dump($run);
 
-          if ($form->isSubmitted()) {
-               $run = $form->getData();
-               $user = $this->getDoctrine()->getManager()
-                    ->getRepository(User::class)
-                    ->findOneById($id);
+           $em->remove($run);
+           $em->flush();
 
-               $run->setUser($user);
-               dump($run);
-
-               $em = $this->getDoctrine()->getManager();
-               $em->persist($run);
-               $em->flush();
-
-          }
-
-         return $this->render('form.html.twig', array(
-             'form' => $form->createView(),
-         ));
+           return new Response('<html><body>OK</body></html>');
+     //     $run = new Run();
+     //
+     //     $form = $this->createForm();
+     //
+     //      $form->handleRequest($request);
+     //
+     //      if ($form->isSubmitted() && $form->isValid()) {
+     //           $run = $form->getData();
+     //           $user = $this->getDoctrine()->getManager()
+     //                ->getRepository(User::class)
+     //                ->findOneById($id);
+     //
+     //           $run->setUser($user);
+     //           dump($run);
+     //
+     //           $em = $this->getDoctrine()->getManager();
+     //           $em->persist($run);
+     //           $em->flush();
+     //
+     //      }
+     //
+     //     return $this->render('form.html.twig', array(
+     //         'form' => $form->createView(),
+     //     ));
      }
 }

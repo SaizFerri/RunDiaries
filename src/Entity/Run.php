@@ -25,7 +25,8 @@ class Run
      private $user;
 
      /**
-      * @ORM\ Column(type="date")
+      * @Assert\NotBlank()
+      * @ORM\Column(type="date")
       */
      private $date;
 

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Run;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use App\Form\UserRegistrationType;
+use App\Form\RunType;
 
 class UserController extends Controller
 {
@@ -65,9 +67,45 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/profile/{id}", name="user_profile", requirements={"id"="\d+"})
+     */
+    public function showProfile(Request $request, User $user)
+    {
+
+        // FIX THIS SHIT
+        $run = new Run();
+        $form = $this->createForm(RunType::class, $run)->remove('speed');
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $run = $form->getData();
+            $user = $this->getDoctrine()->getManager()
+                    ->getRepository(User::class)
+                    ->findOneById($id);
+
+            $run->setUser($user);
+            $run->setSpeed(12);
+            dump($run);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($run);
+            $em->flush();
+
+        }
+
+        return $this->render('user/profile.html.twig', array(
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail(),
+            'runs' => $user->getRuns(),
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
      * @Route("/user/{id}", name="show_user", requirements={"id"="\d+"})
      */
-     public function index(User $user)
+     public function index(User $user, UserInterface $userLoggedIn)
      {
 
         if (!$user) {
@@ -76,11 +114,14 @@ class UserController extends Controller
             );
         }
 
+        if ($user->getId() === $userLoggedIn->getId()) {
+            return $this->redirectToRoute('user_profile', array('id' => $userLoggedIn->getId()));
+        }
+
         return $this->render('user/user.html.twig', array(
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'runs' => $user->getRuns(),
-            'response' => $user->getUsername(),
         ));
 
      }
