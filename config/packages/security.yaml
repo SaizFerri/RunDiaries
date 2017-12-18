@@ -36,4 +36,5 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/run, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     access_denied_url: /
