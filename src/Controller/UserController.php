@@ -30,8 +30,7 @@ class UserController extends Controller
         return $this->render('security/login.html.twig', array(
             'id'            => $id,
             'last_username' => $lastUsername,
-            'error'         => $error,
-            'response'      => 'Ok',
+            'error'         => $error
         ));
     }
 
