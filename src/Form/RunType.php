@@ -17,18 +17,22 @@ class RunType extends AbstractType
     {
         $builder
             ->add('date', DateType::class, array(
+                'widget' => 'single_text',
+                'html5' => false,
                 'required' => true
             ))
             ->add('distance', NumberType::class, array(
                 'required' => true
             ))
             ->add('time', TimeType::class, array(
-                'required' => true
+                'required' => true,
+                'with_seconds' => true,
+                'widget' => 'text'
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Save',
                 'attr' => array(
-                    'class' => 'btn btn-success pull-right'
+                    'class' => 'btn btn-success'
                 )
         ));
     }

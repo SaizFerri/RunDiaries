@@ -7,6 +7,27 @@ a:hover {
     color: #e3e3e3;
 }
 
+.my-form {
+    position: fixed;
+    bottom: 0;
+    background-color: #313538;
+    color: #fff;
+    width: 100%;
+}
+
+.my-form .row {
+    padding: 1rem 0 1rem 8rem;
+}
+
+.profile-header {
+    padding: 2rem 0;   
+}
+
+.profile-overview {
+    background-color: #ffc00c;
+    padding: 1rem;
+}
+
 .my-table>tbody>tr>td,
 .my-table>tbody>tr>th {
     vertical-align: middle;

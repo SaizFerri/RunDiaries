@@ -1,1 +1,25 @@
-
+<div class="my-form">
+    <form action="{{ path('user_profile', { 'id': id }) }}" method="post">
+        <div class="row justify-content-center align-items-center">
+            {{ form_errors(form) }}
+            <div class="col-lg-2 form-group my-sandbox">
+                {{ form_row(form.date, { attr: { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-lg-2 form-group">
+                {{ form_row(form.distance, { attr: { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-lg-2 form-group">
+                {{ form_row(form.time.hour, { attr: { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-lg-2 form-group">
+                {{ form_row(form.time.minute, { attr: { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-lg-2 form-group">
+                {{ form_row(form.time.second, { attr: { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-lg-2 pt-3">
+                {{ form_row(form.save) }}
+            </div>
+        </div>
+    </form>
+</div>

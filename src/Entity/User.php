@@ -61,6 +61,30 @@ class User implements UserInterface
         return $this->runs;
     }
 
+    public function getAllKm()
+    {
+        $runs = $this->getRuns();
+        $distance = 0;
+
+        foreach ($runs as $run) {
+            $distance += $run->getDistance();
+        }
+
+        return $distance;
+    }
+
+    public function getAllDays()
+    {
+        $runs = $this->getRuns();
+        $days = 0;
+
+        foreach ($runs as $run) {
+            $days++;
+        }
+
+        return $days;
+    }
+
     public function getId()
     {
         return $this->id;

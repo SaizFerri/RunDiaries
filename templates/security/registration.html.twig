@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Registration{% endblock %}
 {% block body %}
     <form action="{{ path('register') }}" method="post">
         {{ form_errors(form) }}

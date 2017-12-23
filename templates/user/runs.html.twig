@@ -26,7 +26,7 @@
                         {{ run.speed }} km/h
                     </td>
                     <td>
-                        <a class="btn btn-danger my-btn-remove" href="#">x</a>
+                        <a class="btn btn-danger my-btn-remove" href="{{ path('delete_run', { id: run.id }) }}">x</a>
                     </td>
                 </tr>
             {% endfor %}

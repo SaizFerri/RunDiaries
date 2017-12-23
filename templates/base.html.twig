@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
             <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         {% endblock %}
     </head>
@@ -13,6 +15,20 @@
         <div class="container">
             {% block body %}{% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
+        {% block profile %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/popper.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+            <script>
+                $(document).ready(function() {
+                    $('.my-sandbox input').datepicker({
+                        format: 'yyyy-mm-dd',
+                        autoclose: true
+                    });
+                });
+            </script>
+        {% endblock %}
     </body>
 </html>

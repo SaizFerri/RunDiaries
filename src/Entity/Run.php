@@ -43,7 +43,6 @@ class Run
      private $time;
 
      /**
-      * @Assert\NotBlank()
       * @ORM\Column(type="float")
       */
      private $speed;

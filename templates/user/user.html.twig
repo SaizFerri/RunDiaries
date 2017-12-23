@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Profile - {{ username }}{% endblock %}
 {% block body %}
-    <div class="row align-items-center">
+    <div class="row align-items-center profile-header">
         <div class="col-lg-2">
             <img class="rounded-circle" src="http://via.placeholder.com/140x140" alt="profile-pic">
         </div>
@@ -10,18 +10,18 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row no-gutters profile-overview">
         <div class="col-lg-4">
             <!-- Anzahl der Lauftage -->
-            lauftage
+            <span>Lauftage: </span>{{ totalDays }}
         </div>
         <div class="col-lg-4">
             <!-- Gesamttage seit dem ersten Lauftag (bis heute, nicht bis zum letzten hinterlegten Lauftag) -->
-            gesamttage
+            <span>Gesamttage: </span>
         </div>
         <div class="col-lg-4">
             <!-- Gesamte bisher gelaufene Strecke -->
-            strecke
+            <span>Gesamtstrecke: </span>{{ totalKm }} km
         </div>
     </div>
 

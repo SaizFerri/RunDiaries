@@ -72,7 +72,6 @@ class UserController extends Controller
     public function showProfile(Request $request, User $user)
     {
 
-        // FIX THIS SHIT
         $run = new Run();
         $form = $this->createForm(RunType::class, $run)->remove('speed');
 
@@ -82,7 +81,7 @@ class UserController extends Controller
             $run = $form->getData();
             $user = $this->getDoctrine()->getManager()
                     ->getRepository(User::class)
-                    ->findOneById($id);
+                    ->findOneById($user->getId());
 
             $run->setUser($user);
             $run->setSpeed(12);
@@ -95,9 +94,12 @@ class UserController extends Controller
         }
 
         return $this->render('user/profile.html.twig', array(
+            'id' => $user->getId(),
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'runs' => $user->getRuns(),
+            'totalKm' => $user->getAllKm(),
+            'totalDays' => $user->getAllDays(),
             'form' => $form->createView()
         ));
     }
@@ -122,6 +124,8 @@ class UserController extends Controller
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'runs' => $user->getRuns(),
+            'totalKm' => $user->getAllKm(),
+            'totalDays' => $user->getAllDays()
         ));
 
      }
