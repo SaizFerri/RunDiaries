@@ -5,7 +5,7 @@
         {% for user in users %}
             <div class="col-lg-4 pt-1 pb-1">
                 <div class="card" style="width: 20rem;">
-                    <img class="card-img-top" src="http://via.placeholder.com/318x180" alt="card-image">
+                    <img class="card-img-top" src="{{ asset('assets/img/profile.jpg') }}" alt="card-image">
                     <div class="card-body">
                         <h4 class="card-title">{{ user.username }}</h4>
                         <span>Anzahl der lauftage</span><br>

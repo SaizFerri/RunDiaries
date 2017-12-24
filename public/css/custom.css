@@ -1,3 +1,9 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
 a {
     text-decoration: none;
     color: #000;
@@ -5,6 +11,11 @@ a {
 
 a:hover {
     color: #e3e3e3;
+}
+
+.img {
+    width: 100%;
+    height: auto;
 }
 
 .my-form {
@@ -20,12 +31,16 @@ a:hover {
 }
 
 .profile-header {
-    padding: 2rem 0;   
+    padding: 2rem 0;
 }
 
 .profile-overview {
     background-color: #ffc00c;
     padding: 1rem;
+}
+
+.card-img-top {
+    max-height: 250px;
 }
 
 .my-table>tbody>tr>td,

@@ -23,10 +23,8 @@ class RunController extends Controller
               ->getRepository(Run::class)
               ->find($id);
 
-          dump($run);
-
-           $em->remove($run);
-           $em->flush();
+          $em->remove($run);
+          $em->flush();
 
           return $this->redirectToRoute('user_profile', array('id' => $run->getUser()->getId()));
      }

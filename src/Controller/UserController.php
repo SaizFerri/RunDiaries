@@ -85,7 +85,6 @@ class UserController extends Controller
 
             $run->setUser($user);
             $run->setSpeed(12);
-            dump($run);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($run);
