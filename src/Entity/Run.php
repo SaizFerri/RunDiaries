@@ -112,4 +112,58 @@ class Run
     {
         return $this->speed = $speed;
     }
+
+    public function calculateSpeed()
+    {
+        $distance = $this->convertKmToMeters($this->getDistance());
+        $time = $this->convertTimeToSeconds($this->getFormatedTime());
+
+        $result = $distance / $time;
+        $roundedResult = round($result, 2);
+        
+        return $this->convertMsToKmh($roundedResult);
+    }
+
+    private function convertMsToKmh($value)
+    {
+        $speedMultiplier = 3.6;
+        $result = $value * $speedMultiplier;
+        return round($result, 2);
+    }
+
+    private function convertKmToMeters($value)
+    {
+        return $value*1000;
+    }
+
+    private function convertTimeToSeconds($time)
+    {
+        $hours = 0;
+        $minutes = 0;
+        $seconds = 0;
+
+        $time = str_replace(':', '', $time);
+        $hours = substr($time, 0, 2);
+        $minutes = substr($time, 2, 2);
+        $seconds = substr($time, 4, 2);
+
+        // if statements to check if none of the parts have a 0 before the actual value like 01 hours,
+        // if so it will be converted in just the second value of the string, in this example 1
+        if (substr($hours, 0, 1) == 0) {
+            $hours = substr($hours, 1, 1);
+        }
+        if (substr($minutes, 0, 1) == 0) {
+            $minutes = substr($minutes, 1, 1);
+        }
+        if (substr($seconds, 0, 1) == 0) {
+            $seconds = substr($seconds, 1, 1);
+        }
+
+        $hours *= 3600; //60 * 60 = 3600
+        $minutes *= 60; // 1 time * 60 for the minutes
+
+        $time_in_seconds = $hours + $minutes + $seconds;
+
+        return $time_in_seconds;
+    }
 }

@@ -2,8 +2,8 @@
 
 {% block title %}My profile{% endblock %}
 {% block profile %}
-    <div class="container">
-        <div class="row no-gutters align-items-center profile-header">
+    <div class="container profile-content">
+        <div class="row align-items-center profile-header">
             <div class="col-lg-2">
                 <img class="rounded-circle img" src="{{ asset('assets/img/profile.jpg') }}" alt="profile-pic">
             </div>
@@ -15,15 +15,15 @@
         <div class="row no-gutters profile-overview">
             <div class="col-lg-4">
                 <!-- Anzahl der Lauftage -->
-                <span>Lauftage: </span>{{ totalDays }}
+                <span>Running days: </span>{{ totalDays }}
             </div>
             <div class="col-lg-4">
                 <!-- Gesamttage seit dem ersten Lauftag (bis heute, nicht bis zum letzten hinterlegten Lauftag) -->
-                <span>Gesamttage: </span>
+                <span>Days until today: </span>
             </div>
             <div class="col-lg-4">
                 <!-- Gesamte bisher gelaufene Strecke -->
-                <span>Gesamtstrecke: </span>{{ totalKm }} km
+                <span>Total running km: </span>{{ totalKm }} km
             </div>
         </div>
 

@@ -18,6 +18,9 @@ class RunType extends AbstractType
         $builder
             ->add('date', DateType::class, array(
                 'widget' => 'single_text',
+                'attr' => array(
+                    'data-date-end-date' => '0d'
+                ),
                 'html5' => false,
                 'required' => true
             ))

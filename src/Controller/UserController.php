@@ -69,8 +69,11 @@ class UserController extends Controller
     /**
      * @Route("/profile/{id}", name="user_profile", requirements={"id"="\d+"})
      */
-    public function showProfile(Request $request, User $user)
+    public function showProfile(Request $request, User $user, UserInterface $userLoggedIn)
     {
+        if ($user->getId() !== $userLoggedIn->getId()) {
+            return $this->redirectToRoute('show_user', array('id' => $user->getId()));
+        }
 
         $run = new Run();
         $form = $this->createForm(RunType::class, $run)->remove('speed');
@@ -84,7 +87,7 @@ class UserController extends Controller
                     ->findOneById($user->getId());
 
             $run->setUser($user);
-            $run->setSpeed(12);
+            $run->setSpeed($run->calculateSpeed());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($run);
@@ -106,7 +109,7 @@ class UserController extends Controller
     /**
      * @Route("/user/{id}", name="show_user", requirements={"id"="\d+"})
      */
-     public function index(User $user, UserInterface $userLoggedIn)
+     public function showUser(User $user, UserInterface $userLoggedIn = null)
      {
 
         if (!$user) {
@@ -115,8 +118,10 @@ class UserController extends Controller
             );
         }
 
-        if ($user->getId() === $userLoggedIn->getId()) {
-            return $this->redirectToRoute('user_profile', array('id' => $userLoggedIn->getId()));
+        if ($userLoggedIn !== null) {
+            if ($user->getId() === $userLoggedIn->getId()) {
+                return $this->redirectToRoute('user_profile', array('id' => $userLoggedIn->getId()));
+            }
         }
 
         return $this->render('user/user.html.twig', array(

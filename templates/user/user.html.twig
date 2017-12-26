@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Profile - {{ username }}{% endblock %}
 {% block body %}
     <div class="row align-items-center profile-header">
@@ -13,15 +14,15 @@
     <div class="row no-gutters profile-overview">
         <div class="col-lg-4">
             <!-- Anzahl der Lauftage -->
-            <span>Lauftage: </span>{{ totalDays }}
+            <span>Running days: </span>{{ totalDays }}
         </div>
         <div class="col-lg-4">
             <!-- Gesamttage seit dem ersten Lauftag (bis heute, nicht bis zum letzten hinterlegten Lauftag) -->
-            <span>Gesamttage: </span>
+            <span>Days until today: </span>
         </div>
         <div class="col-lg-4">
             <!-- Gesamte bisher gelaufene Strecke -->
-            <span>Gesamtstrecke: </span>{{ totalKm }} km
+            <span>Total running km: </span>{{ totalKm }} km
         </div>
     </div>
 

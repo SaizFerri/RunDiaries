@@ -30,6 +30,10 @@ a:hover {
     padding: 1rem 0 1rem 8rem;
 }
 
+.profile-content {
+    margin-bottom: 126px;
+}
+
 .profile-header {
     padding: 2rem 0;
 }
