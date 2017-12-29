@@ -21,6 +21,7 @@ class RunType extends AbstractType
                 'attr' => array(
                     'data-date-end-date' => '0d'
                 ),
+                'placeholder' => 'yyyy-mm-dd',
                 'html5' => false,
                 'required' => true
             ))

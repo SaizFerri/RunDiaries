@@ -89,6 +89,15 @@ class UserController extends Controller
             $run->setUser($user);
             $run->setSpeed($run->calculateSpeed());
 
+            $validator = $this->get('validator');
+            $errors = $validator->validate($run);
+
+            if (count($errors) > 0) {
+                $errorsString = (string) $errors;
+                    
+                return $this->redirectToRoute('user_profile', array('id' => $userLoggedIn->getId()));
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($run);
             $em->flush();

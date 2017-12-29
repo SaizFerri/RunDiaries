@@ -26,23 +26,27 @@ class Run
 
      /**
       * @Assert\NotBlank()
+      * @Assert\Date()
       * @ORM\Column(type="date")
       */
      private $date;
 
      /**
       * @Assert\NotBlank()
+      * @Assert\GreaterThan(0)
       * @ORM\Column(type="float")
       */
      private $distance;
 
      /**
-      * @Assert\NotBlank()
+      * @Assert\NotBlank() 
+      * @Assert\Time()
       * @ORM\Column(type="time")
       */
      private $time;
 
      /**
+      * @Assert\LessThan(40)
       * @ORM\Column(type="float")
       */
      private $speed;
@@ -120,7 +124,7 @@ class Run
 
         $result = $distance / $time;
         $roundedResult = round($result, 2);
-        
+
         return $this->convertMsToKmh($roundedResult);
     }
 
