@@ -1,8 +1,12 @@
 $(document).ready(function() {
     $('input').val('');
-});
 
-$('.js-toggle-form').click(function() {
-    $('.my-form').toggleClass('is-hidden');
-    $('.js-toggle-form').toggleClass('is-fixed-bottom');
+    $('.js-toggle-form span').on('click', function() {
+        $('.my-form').addClass('is-hidden');
+    });
+
+    $('.my-add-btn').on('click', function() {
+        $('.my-form').removeClass('is-hidden');
+    });
+
 });

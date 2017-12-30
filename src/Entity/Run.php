@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints as AcmeAssert;
 use App\Entity\User;
 
 /**
@@ -27,6 +28,7 @@ class Run
      /**
       * @Assert\NotBlank()
       * @Assert\Date()
+      * @AcmeAssert\MyDate
       * @ORM\Column(type="date")
       */
      private $date;
@@ -39,7 +41,7 @@ class Run
      private $distance;
 
      /**
-      * @Assert\NotBlank() 
+      * @Assert\NotBlank()
       * @Assert\Time()
       * @ORM\Column(type="time")
       */
