@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row">
+    <div class="row justify-content-center-sm">
         {% for user in users %}
-            <div class="col-lg-4 pt-1 pb-1">
+            <div class="col-lg-4 col-md-6 pt-1 pb-1">
                 <div class="card" style="width: 20rem;">
                     <img class="card-img-top" src="{{ asset('assets/img/profile.jpg') }}" alt="card-image">
                     <div class="card-body">

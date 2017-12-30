@@ -3,24 +3,24 @@
 {% block title %}Profile - {{ username }}{% endblock %}
 {% block body %}
     <div class="row align-items-center profile-header">
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
             <img class="rounded-circle img" src="{{ asset('assets/img/profile.jpg') }}" alt="profile-pic">
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
             <h3>{{ username }}</h3>
         </div>
     </div>
 
     <div class="row no-gutters profile-overview">
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-4 col-12">
             <!-- Anzahl der Lauftage -->
             <span>Running days: </span>{{ totalDays }}
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-4 col-12">
             <!-- Gesamttage seit dem ersten Lauftag (bis heute, nicht bis zum letzten hinterlegten Lauftag) -->
             <span>Days until today: </span>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-4 col-12">
             <!-- Gesamte bisher gelaufene Strecke -->
             <span>Total running km: </span>{{ totalKm }} km
         </div>

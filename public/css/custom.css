@@ -18,16 +18,42 @@ a:hover {
     height: auto;
 }
 
+
 .my-form {
     position: fixed;
     bottom: 0;
     background-color: #313538;
     color: #fff;
     width: 100%;
+    transition: bottom .5s ease;
 }
 
 .my-form .row {
-    padding: 1rem 0 1rem 8rem;
+    padding: 1rem;
+}
+
+.is-hidden {
+    bottom: -1000px;
+}
+
+.toggle-form {
+    position: relative;
+    background-color: #ececec;
+    padding: .5rem;
+    top: -25px;
+    left: 395px;
+    width: 40px;
+    height: 20px;
+    color: #000;
+}
+
+.is-fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: unset;
+    right: unset;
+    z-index: 999;
 }
 
 .profile-content {
