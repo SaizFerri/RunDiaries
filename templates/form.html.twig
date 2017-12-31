@@ -2,10 +2,9 @@
     <div class="container">
         <button type="button" class="close my-form-close js-toggle-form" aria-label="Close">
           <span aria-hidden="true" class="p-2">&times;</span>
-        </button>
+        </button>   
         <form action="{{ path('user_profile', { 'id': id }) }}" method="post">
             <div class="row justify-content-center align-items-center">
-                {{ form_errors(form) }}
                 <div class="col-lg-2 col-md-6 form-group my-sandbox">
                     {{ form_row(form.date, { attr: { 'class': 'form-control', 'placeholder': 'yyyy-mm-dd' } }) }}
                 </div>

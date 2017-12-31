@@ -142,7 +142,7 @@ class Run
         return $value*1000;
     }
 
-    private function convertTimeToSeconds($time)
+    public function convertTimeToSeconds($time)
     {
         $hours = 0;
         $minutes = 0;

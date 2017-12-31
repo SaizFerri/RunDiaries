@@ -87,14 +87,19 @@ class UserController extends Controller
                     ->findOneById($user->getId());
 
             $run->setUser($user);
-            $run->setSpeed($run->calculateSpeed());
+
+            if ($run->convertTimeToSeconds($run->getFormatedTime($run->getTime())) > 0) {
+                $run->setSpeed($run->calculateSpeed());
+            } else {
+                return $this->redirectToRoute('user_profile', array('id' => $userLoggedIn->getId()));
+            }
 
             $validator = $this->get('validator');
             $errors = $validator->validate($run);
 
             if (count($errors) > 0) {
                 $errorsString = (string) $errors;
-                    
+
                 return $this->redirectToRoute('user_profile', array('id' => $userLoggedIn->getId()));
             }
 
