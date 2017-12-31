@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for run in runs %}
+            {% for run in runs|orderByDate %}
                 <tr id="{{ run.id }}">
                     <th scope="row">
                         {{ run.getFormatedDate }}
