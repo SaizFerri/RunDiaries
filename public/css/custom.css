@@ -10,36 +10,13 @@ a {
 }
 
 a:hover {
+    text-decoration: none;
     color: #e3e3e3;
 }
 
 .img {
     width: 100%;
     height: auto;
-}
-
-.my-form {
-    position: fixed;
-    bottom: 0;
-    background-color: #313538;
-    color: #fff;
-    width: 100%;
-    transition: bottom .5s ease;
-}
-
-.my-form .row {
-    padding: 1rem;
-}
-
-.is-hidden {
-    bottom: -1000px;
-}
-
-.my-form-close {
-    position: absolute;
-    right: 0;
-    top: .5rem;
-    color: #fff;
 }
 
 .my-add-btn {
@@ -69,4 +46,10 @@ a:hover {
 .my-table>tbody>tr>td,
 .my-table>tbody>tr>th {
     vertical-align: middle;
+}
+
+.my-table-wrapper {
+    width: 100%;
+    height: auto;
+    overflow: auto;
 }
