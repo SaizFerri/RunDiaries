@@ -183,6 +183,4 @@ class User implements UserInterface
     public function eraseCredentials()
     {
     }
-
-    // other methods, including security methods like getRoles()
 }

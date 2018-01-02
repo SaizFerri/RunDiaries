@@ -13,15 +13,12 @@
 
     <div class="row no-gutters profile-overview">
         <div class="col-lg-4 col-md-4 col-12">
-            <!-- Anzahl der Lauftage -->
             <span>Running days: </span>{{ totalDays }}
         </div>
         <div class="col-lg-4 col-md-4 col-12">
-            <!-- Gesamttage seit dem ersten Lauftag (bis heute, nicht bis zum letzten hinterlegten Lauftag) -->
             <span>Days until today: </span>{{ daysUntliToday|default('0') }}
         </div>
         <div class="col-lg-4 col-md-4 col-12">
-            <!-- Gesamte bisher gelaufene Strecke -->
             <span>Total running km: </span>{{ totalKm }} km
         </div>
     </div>

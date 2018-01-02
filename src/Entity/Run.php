@@ -153,8 +153,6 @@ class Run
         $minutes = substr($time, 2, 2);
         $seconds = substr($time, 4, 2);
 
-        // if statements to check if none of the parts have a 0 before the actual value like 01 hours,
-        // if so it will be converted in just the second value of the string, in this example 1
         if (substr($hours, 0, 1) == 0) {
             $hours = substr($hours, 1, 1);
         }
@@ -165,8 +163,8 @@ class Run
             $seconds = substr($seconds, 1, 1);
         }
 
-        $hours *= 3600; //60 * 60 = 3600
-        $minutes *= 60; // 1 time * 60 for the minutes
+        $hours *= 3600;
+        $minutes *= 60;
 
         $time_in_seconds = $hours + $minutes + $seconds;
 
