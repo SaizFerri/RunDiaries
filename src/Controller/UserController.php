@@ -91,6 +91,12 @@ class UserController extends Controller
             if ($run->convertTimeToSeconds($run->getFormatedTime($run->getTime())) > 0) {
                 $run->setSpeed($run->calculateSpeed());
             } else {
+
+                $this->addFlash(
+                    'danger',
+                    'The time can\'t be 0.'
+                );
+
                 return $this->redirectToRoute('user_profile', array('id' => $userLoggedIn->getId()));
             }
 
@@ -99,6 +105,11 @@ class UserController extends Controller
 
             if (count($errors) > 0) {
                 $errorsString = (string) $errors;
+
+                $this->addFlash(
+                    'danger',
+                    'You aren\'t superman, your speed can\'t exceed 40km/h.'
+                );
 
                 return $this->redirectToRoute('user_profile', array('id' => $userLoggedIn->getId()));
             }
@@ -115,6 +126,7 @@ class UserController extends Controller
             'email' => $user->getEmail(),
             'runs' => $user->getRuns(),
             'totalKm' => $user->getAllKm(),
+            'daysUntliToday' => $user->getDaysUntilToday(),
             'totalDays' => $user->getAllDays(),
             'form' => $form->createView()
         ));
@@ -142,6 +154,7 @@ class UserController extends Controller
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'runs' => $user->getRuns(),
+            'daysUntliToday' => $user->getDaysUntilToday(),
             'totalKm' => $user->getAllKm(),
             'totalDays' => $user->getAllDays()
         ));

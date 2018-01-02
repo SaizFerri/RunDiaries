@@ -85,6 +85,35 @@ class User implements UserInterface
         return $days;
     }
 
+    public function getDaysUntilToday()
+    {
+        $runs = $this->getRuns();
+
+        for ($i = 0; $i < sizeof($runs); $i++) {
+            for ($j = 0; $j < sizeof($runs); $j++) {
+                if (strtotime($runs[$i]->getFormatedDate()) < strtotime($runs[$j]->getFormatedDate())) {
+                    $tmp = $runs[$i];
+                    $runs[$i] = $runs[$j];
+                    $runs[$j] = $tmp;
+                }
+            }
+        }
+
+        if (count($runs) > 0) {
+            date_default_timezone_set('Europe/Berlin');
+            $date = date('d-m-Y', time());
+
+            $first = strtotime($runs[0]->getFormatedDate());
+            $last = strtotime($date);
+
+            $datediff = $last - $first;
+
+            return floor($datediff / (60 * 60 * 24));
+        } else {
+            return null;
+        }
+    }
+
     public function getId()
     {
         return $this->id;

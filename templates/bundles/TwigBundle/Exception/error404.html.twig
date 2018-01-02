@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron">
+    <h1 class="display-4">Ups! The page you were looking for doesn't exist.</h1>
+    <hr class="my-4">
+    <p>Return to the overview page.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{{ path('overview') }}" role="button">Overview</a>
+    </p>
+</div>
+{% endblock %}
